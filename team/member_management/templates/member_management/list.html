@@ -2,7 +2,6 @@
 <link rel="stylesheet" href="{% static 'member_management/style.css' %}">
 
 <div class="app">
-  {% if member_list %}
   <table class="members-list">
     <tr>
       <td colspan="2">
@@ -12,7 +11,11 @@
             <a href="{% url 'member_management:add' %}">+</a>
           </p>
           <h1>Team Members</h1>
-          <p>You have {{ size }} team members.</p><br>
+          {% if member_list %}
+            <p>You have {{ size }} team members.</p><br>
+            {% else %}
+              <p>No members yet.</p>
+            {% endif %}
         </header>
       </td>
     </tr>
@@ -33,7 +36,5 @@
         </tr>
       {% endfor %}
     </table>
-  {% else %}
-    <p>No members yet.</p>
-  {% endif %}
+
 </div>
