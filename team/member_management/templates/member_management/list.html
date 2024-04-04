@@ -1,0 +1,39 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'member_management/style.css' %}">
+
+<div class="app">
+  {% if member_list %}
+  <table class="members-list">
+    <tr>
+      <td colspan="2">
+        <header>
+          {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+          <p class="add-button">
+            <a href="{% url 'member_management:add' %}">+</a>
+          </p>
+          <h1>Team Members</h1>
+          <p>You have {{ size }} team members.</p><br>
+        </header>
+      </td>
+    </tr>
+      {% for member in member_list %}
+        <tr class="TeamMemberListItem">
+          <td>
+            <img src="{% static 'member_management/user-icon.png' %}" alt="user-icon" class="user-icon-image">
+          </td>
+          <td>
+            <a href="{% url 'member_management:edit' member.id %}">
+              <div class="member-details">
+                <strong>{{ member.first_name }} {{ member.last_name }} {% if member.is_admin %} (admin) {% endif %}</strong><br>
+                {{ member.phone }} <br>
+                {{ member.email }} <br>
+              </div><br>
+            </a>
+          </td>
+        </tr>
+      {% endfor %}
+    </table>
+  {% else %}
+    <p>No members yet.</p>
+  {% endif %}
+</div>

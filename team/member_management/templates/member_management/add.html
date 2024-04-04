@@ -1,0 +1,48 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'member_management/style.css' %}">
+
+<div class="app">
+  <header>
+    <h1>Add a team member</h1>
+    <p>Set name, contact info and role</p>
+  </header>
+  <form action="{% url 'member_management:submit_add' %}" method="post">
+    {% csrf_token %}
+    <fieldset class="members-form">
+      <strong>Info</strong>
+      <table class="members-table">
+        <tr>
+          <td><label for="first_name">First Name</label></td>
+          <td><input type="text" name="first_name" id="first_name" value=""><br></td>
+        </tr>
+        <tr>
+          <td><label for="last_name">Last Name</label></td>
+          <td><input type="text" name="last_name" id="last_name" value=""><br></td>
+        </tr>
+        <tr>
+          <td><label for="email">Email</label></td>
+          <td><input type="text" name="email" id="email" value=""><br></td>
+        </tr>
+        <tr>
+          <td><label for="phone">Phone</label></td>
+          <td><input type="text" name="phone" id="phone" value=""><br></td>
+        </tr>
+      </table>
+      <br><strong>Role</strong>
+      <table>
+        <tr>
+          <td><label for="role_regular">Regular</label></td>
+          <td><input type="radio" name="is_admin" id="role_regular" value=False checked></td>
+        </tr>
+        <tr>
+          <td><label for="role_admin">Admin</label></td>
+          <td><input type="radio" name="is_admin" id="role_admin" value=True></td>
+        </tr>
+      </table>
+    </fieldset>
+    <div align="center">
+      <button type="submit" name="back" class="submit-button">Back</button>
+      <button type="submit" name="add" class="submit-button">Add Team member</button>
+    </div>
+  </form>
+</div>
